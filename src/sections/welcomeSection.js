@@ -9,7 +9,7 @@ const WelcomeSection = ( props ) => {
     const { classes } = props
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} id="welcome">
             <div className={classes.wrapContainer}>
                 <div className={classes.welcomeContainer}>
                     <div className={classes.textContainer}>
@@ -109,6 +109,7 @@ const styles = () => ({
         fontSize: '24px',
         textAlign: 'left',
         fontWeight: '300',
+        lineHeight: '1.6'
     },
     clickMore: {
         marginTop: '90px',
