@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import welcomeImg from '../images/welcome.svg'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-
+import { Link } from 'react-scroll'
 const WelcomeSection = ( props ) => {
 
     const { classes } = props
@@ -33,10 +33,11 @@ const WelcomeSection = ( props ) => {
                     <span className={classes.introText}>
                         Programming is the act of instructing computers to carry out tasks. Computers are powerful and stupid. They are powerful to look through masses of a data and process billions of operations per second. Stupid because each operation is simple and mechanical, nothing like "insight" or "thinking"
                     </span>
-
-                    <div className={classes.clickMore}>
-                        <span className={classes.readMoreText}>Read more about me below </span>
-                        <ArrowDownwardIcon className={classes.downIcon}/>
+                    <div className={classes.clickMore}> 
+                        <Link to="aboutme" spy={true} smooth={true} offset={50} duration={500}>
+                            <span className={classes.readMoreText}>Read more about me below </span>
+                            <ArrowDownwardIcon className={classes.downIcon} />
+                        </Link>
                     </div>
                 </div>
             </div>

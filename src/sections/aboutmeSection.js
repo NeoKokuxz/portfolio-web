@@ -32,7 +32,6 @@ const AboutMeSection = (props) => {
 
                     </div>
                 </div>
-
             </div>
         </div>
     )
