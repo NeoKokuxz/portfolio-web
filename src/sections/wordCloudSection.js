@@ -7,6 +7,8 @@ import "d3-transition";
 import { select } from "d3-selection";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
+
 const WordCloudSection = (props) => {
 
     const { classes } = props
@@ -133,7 +135,7 @@ const WordCloudSection = (props) => {
             <div className={classes.projectContainer}>
                 {/* Project Section Title */}
                 <div className={classes.projectTitleArea}>
-                    <div>
+                    <div className={classes.projectImgContainer}>
                         <img src={cloudImg} className={classes.titleImg} />
                     </div>
                     <p className={classes.titleText}>Skill Cloud</p>
@@ -151,6 +153,8 @@ const WordCloudSection = (props) => {
     )
 }
 
+const breakpoints = createBreakpoints({})
+
 const styles = () => ({
     container: {
         display: 'flex',
@@ -163,13 +167,23 @@ const styles = () => ({
     },
     projectTitleArea: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        [breakpoints.down('sm')]: {
+            marginRight: '15px'
+        }
     },
     titleText: {
         fontSize: '100px',
         lineHeight: '100%',
         margin: '0px',
-        fontFamily: 'sora'
+        fontFamily: 'sora',
+        [breakpoints.down('sm')]: {
+            textAlign: 'center'
+        }
+    },
+    projectImgContainer: {
+        maxWidth: '1180px',
+        height: '440px',
     },
     titleImg: {
         height: '100%',

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import welcomeImg from '../images/welcome.svg'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
 import { Link } from 'react-scroll'
 const WelcomeSection = ( props ) => {
 
@@ -34,7 +35,7 @@ const WelcomeSection = ( props ) => {
                         Programming is the act of instructing computers to carry out tasks. Computers are powerful and stupid. They are powerful to look through masses of a data and process billions of operations per second. Stupid because each operation is simple and mechanical, nothing like "insight" or "thinking"
                     </span>
                     <div className={classes.clickMore}> 
-                        <Link to="aboutme" spy={true} smooth={true} offset={50} duration={500}>
+                        <Link to="aboutme" spy={true} smooth={true} offset={50} duration={500} className={classes.linkArea}>
                             <span className={classes.readMoreText}>Read more about me below </span>
                             <ArrowDownwardIcon className={classes.downIcon} />
                         </Link>
@@ -44,6 +45,8 @@ const WelcomeSection = ( props ) => {
         </div>
     )
 }
+
+const breakpoints = createBreakpoints({})
 
 const styles = () => ({
     container: {
@@ -57,11 +60,13 @@ const styles = () => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
+        [breakpoints.down('sm')]: { flexDirection: 'column', alignItems: 'center' }
     },
     firstLineContainer: {
         display:'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        [breakpoints.down('sm')]: { flexDirection: 'row', alignItems: 'center' }
     },
     stackedTextContainer: {
         display:'flex',
@@ -75,6 +80,9 @@ const styles = () => ({
         fontSize: '30px',
         textAlign:'left',
         fontWeight:'500',
+        [breakpoints.down('sm')]: {
+            fontSize: '20px'
+        }
     },
     text: {
         fontFamily: 'sora',
@@ -82,12 +90,19 @@ const styles = () => ({
         lineHeight: '80%',
         fontWeight: '700',
         margin: 0,
+        [breakpoints.down('sm')]: { 
+            fontSize: '150px'
+        }
+
     },
     textContainer: {
         textAlign: 'left'
     },
     videoContainer: {
         marginLeft: '50px',
+        [breakpoints.down('sm')]: {
+            margin: '10px',
+        }
     },
     img: {
         width: '100%',
@@ -103,14 +118,31 @@ const styles = () => ({
         flexDirection: 'column',
         justifyContent: 'center',
         marginTop: '90px',
-        marginLeft: '15px'
+        marginLeft: '15px',
+        [breakpoints.down('sm')]: {
+            marginTop: '30px',
+            marginLeft: '0px'
+        }
     },
     introText: {
         fontFamily: 'sora',
         fontSize: '24px',
         textAlign: 'left',
         fontWeight: '300',
-        lineHeight: '1.6'
+        lineHeight: '1.6',
+        [breakpoints.down('sm')]: {
+            marginLeft: '15px',
+            marginRight: '7px'
+        }
+    },
+    linkArea: {
+        display: 'flex',
+        [breakpoints.down('sm')]: {
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '0px'
+        }
     },
     clickMore: {
         marginTop: '90px',
@@ -121,6 +153,9 @@ const styles = () => ({
         cursor: 'pointer',
         "&:hover": {
             color: 'blue'
+        },
+        [breakpoints.down('sm')]: {
+            marginTop: '30px',
         }
     },
     readMoreText: {

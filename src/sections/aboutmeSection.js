@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import aboutImg from '../images/about.svg'
-
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
 const AboutMeSection = (props) => {
 
     const { classes } = props
@@ -37,6 +37,8 @@ const AboutMeSection = (props) => {
     )
 }
 
+const breakpoints = createBreakpoints({})
+
 const styles = () => ({
     container: {
         display: 'flex',
@@ -47,18 +49,24 @@ const styles = () => ({
         display: 'flex',
         width: '100%',
         maxWidth: '1180px',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        [breakpoints.down('sm')]: { flexDirection: 'column', alignItems: 'center' }
     },
     aboutMeTitle: {
         marginTop: '90px',
         marginLeft: '50px',
         textAlign: 'center',
+        [breakpoints.down('sm')]: {
+            order: 1,
+            margin: '0px',
+            marginTop: '90px'
+        }
     },
     aboutText : {
         fontSize: '100px',
         lineHeight: '100%',
         margin: '0px',
-        fontFamily: 'sora'
+        fontFamily: 'sora',
     },
     aboutMeTextArea: {
 
@@ -75,8 +83,11 @@ const styles = () => ({
     },
     aboutMeImgArea: {
         marginTop: '90px',
-        width: '100%',
-        maxWidth: '540px'
+        maxWidth: '540px',
+        [breakpoints.down('sm')]: {
+            order: 2,
+            margin: '10px',
+        }
     },
     aboutMeImg: {
         width: '100%',
@@ -92,7 +103,11 @@ const styles = () => ({
         fontSize: '24px',
         textAlign: 'left',
         fontWeight: '300',
-        lineHeight: '1.6'
+        lineHeight: '1.6',
+        [breakpoints.down('sm')]: {
+            marginLeft: '15px',
+            marginRight: '10px'
+        }
     }
 })
 
