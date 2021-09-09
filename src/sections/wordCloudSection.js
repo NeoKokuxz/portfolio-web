@@ -2,27 +2,44 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import ReactWordcloud from 'react-wordcloud';
-
+import cloudImg from '../images/cloud.svg';
+import "d3-transition";
+import { select } from "d3-selection";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/scale.css";
 const WordCloudSection = (props) => {
 
     const { classes } = props
 
     const callbacks = {
-        getWordColor: word => word.value > 30 ? "#6C63FF" : "#000000",
-        onWordClick: console.log(),
-        onWordMouseOver: console.log(),
-        // getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "good" : "bad"}]`,
-        getWordTooltip: word => ``,
-
+        onWordClick: getCallback("onWordClick"),
+        onWordMouseOut: getCallback("onWordMouseOut"),
+        onWordMouseOver: getCallback("onWordMouseOver"),
     }
+
+    function getCallback(callback) {
+        return function (word, event) {
+            const isActive = callback !== "onWordMouseOut";
+            const element = event.target;
+            const text = select(element);
+            const newSize = word.size * 1.2
+            text.transition()
+                .attr("background", "white")
+                .attr("font-size", isActive ? `${newSize}px` : `${word.size}px`)
+                .attr("text-decoration", isActive ? "underline" : "none");
+        };
+    }
+
     const options = {
         rotations: 0,
         fontFamily: 'Sora',
-        fontSizes: [40, 120],
+        fontSizes: [40, 100],
         deterministic: false,
-        // colors
+        colors: ['#6C63FF', '#4287f5', '#8aa9db', '#9b5bf5'],
+        // transitionDuration: 1000,
+        enableTooltip: false,
     };
-    // const size = [900, 1180];
+    // const size = [300, 1380];
 
     const words = [
         {
@@ -115,7 +132,10 @@ const WordCloudSection = (props) => {
         <div className={classes.container} id="aboutme">
             <div className={classes.projectContainer}>
                 {/* Project Section Title */}
-                <div className={classes.projectTitle}>
+                <div className={classes.projectTitleArea}>
+                    <div>
+                        <img src={cloudImg} className={classes.titleImg} />
+                    </div>
                     <p className={classes.titleText}>Skill Cloud</p>
                 </div>
                 {/* Project Section Display Wall */}
@@ -123,7 +143,8 @@ const WordCloudSection = (props) => {
                     <ReactWordcloud 
                         callbacks={callbacks}
                         options={options}
-                        words={words}/>
+                        words={words}
+                        />
                 </div>
             </div>
         </div>
@@ -140,9 +161,9 @@ const styles = () => ({
         width: '100%',
         maxWidth: '1180px',
     },
-    projectTitle: {
+    projectTitleArea: {
         display: 'flex',
-        justifyContent: 'center'
+        flexDirection: 'column'
     },
     titleText: {
         fontSize: '100px',
@@ -150,8 +171,12 @@ const styles = () => ({
         margin: '0px',
         fontFamily: 'sora'
     },
+    titleImg: {
+        height: '100%',
+        width: '100%'
+    },
     wordCloudArea: {
-        marginTop: '90px'
+        marginTop: '90px',
     }
 })
 
